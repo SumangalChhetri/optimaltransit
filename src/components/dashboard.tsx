@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, { useState } from 'react'
 import Image from 'next/image'
@@ -73,14 +73,15 @@ export default function Dashboard() {
       <aside className={`bg-gradient-to-b from-blue-800 to-indigo-900 text-white transition-all duration-300 ${sidebarOpen ? 'w-full lg:w-64' : 'w-20'} ${sidebarOpen ? 'h-auto' : 'h-screen'} lg:h-screen`}>
         <div className="flex items-center justify-between p-4">
           {sidebarOpen && (
-            <Image
-              src="/logo.png"
-              alt="Opti-Transit Logo"
-              width={150}
-              height={40}
-              className="object-contain"
-            />
+           <Image
+             src="/logo.png"
+             alt="Opti-Transit Logo"
+             width={150}
+             height={40}
+             className="object-contain rounded-lg shadow-md"
+           />
           )}
+          
           <Button variant="ghost" size="icon" onClick={toggleSidebar}>
             {sidebarOpen ? <ChevronsLeft className="h-6 w-6" /> : <ChevronsRight className="h-6 w-6" />}
           </Button>
@@ -88,10 +89,10 @@ export default function Dashboard() {
         <nav className="mt-8">
           <NavItem icon={<Home />} label="Home" active={activeSection === 'home'} expanded={sidebarOpen} onClick={() => setActiveSection('home')} />
           <NavItem icon={<Wrench />} label="Maintenance" active={activeSection === 'maintenance'} expanded={sidebarOpen} onClick={() => setActiveSection('maintenance')} />
-          <NavItem icon={<Truck />} label="Logistics" active={activeSection === 'logistics'} expanded={sidebarOpen} onClick={() => setActiveSection('logistics')} />
+          <NavItem icon={<Truck />} label="Logistics Manager" active={activeSection === 'logistics'} expanded={sidebarOpen} onClick={() => setActiveSection('logistics')} />
           <NavItem icon={<Users />} label="Data Analysis" active={activeSection === 'analysis'} expanded={sidebarOpen} onClick={() => setActiveSection('analysis')} />
           <NavItem icon={<LayoutDashboard />} label="Third Party Logistics" active={activeSection === 'thirdPartyLogistics'} expanded={sidebarOpen} onClick={() => setActiveSection('thirdPartyLogistics')} />
-          <NavItem icon={<MapPin />} label="Dispatch" active={activeSection === 'dispatch'} expanded={sidebarOpen} onClick={() => setActiveSection('dispatch')} />
+          <NavItem icon={<MapPin />} label="Dispatch Coordinator" active={activeSection === 'dispatch'} expanded={sidebarOpen} onClick={() => setActiveSection('dispatch')} />
         </nav>
       </aside>
 
@@ -163,6 +164,12 @@ interface AuthInterfaceProps {
 }
 
 function AuthInterface({ section, onClose, onAuth }: AuthInterfaceProps) {
+  const [loginId, setLoginId] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const [signupEmail, setSignupEmail] = useState('')
+  const [signupPassword, setSignupPassword] = useState('')
+  const [signupConfirmPassword, setSignupConfirmPassword] = useState('')
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -180,11 +187,22 @@ function AuthInterface({ section, onClose, onAuth }: AuthInterfaceProps) {
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="login-id">ID</Label>
-                  <Input id="login-id" placeholder="Enter your ID" />
+                  <Input 
+                    id="login-id" 
+                    value={loginId}
+                    onChange={(e) => setLoginId(e.target.value)}
+                    placeholder="Enter your ID" 
+                  />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="login-password">Password</Label>
-                  <Input id="login-password" type="password" placeholder="Enter your password" />
+                  <Input 
+                    id="login-password" 
+                    type="password" 
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    placeholder="Enter your password" 
+                  />
                 </div>
                 <Button type="submit">Log in</Button>
               </div>
@@ -195,15 +213,33 @@ function AuthInterface({ section, onClose, onAuth }: AuthInterfaceProps) {
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="signup-email">Email</Label>
-                  <Input id="signup-email" type="email" placeholder="Enter your email" />
+                  <Input 
+                    id="signup-email" 
+                    type="email" 
+                    value={signupEmail}
+                    onChange={(e) => setSignupEmail(e.target.value)}
+                    placeholder="Enter your email" 
+                  />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="signup-password">Password</Label>
-                  <Input id="signup-password" type="password" placeholder="Choose a password" />
+                  <Input 
+                    id="signup-password" 
+                    type="password" 
+                    value={signupPassword}
+                    onChange={(e) => setSignupPassword(e.target.value)}
+                    placeholder="Choose a password" 
+                  />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="signup-confirm-password">Confirm Password</Label>
-                  <Input id="signup-confirm-password" type="password" placeholder="Confirm your password" />
+                  <Input 
+                    id="signup-confirm-password" 
+                    type="password" 
+                    value={signupConfirmPassword}
+                    onChange={(e) => setSignupConfirmPassword(e.target.value)}
+                    placeholder="Confirm your password" 
+                  />
                 </div>
                 <Button type="submit">Sign up</Button>
               </div>
